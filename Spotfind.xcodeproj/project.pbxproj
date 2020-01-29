@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -48,6 +48,8 @@
 		C99DB87723C62CF8007B7884 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C99DB87523C62CF8007B7884 /* LaunchScreen.storyboard */; };
 		C99DB88223C62CF8007B7884 /* SpotfindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99DB88123C62CF8007B7884 /* SpotfindTests.swift */; };
 		C99DB88D23C62CF8007B7884 /* SpotfindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99DB88C23C62CF8007B7884 /* SpotfindUITests.swift */; };
+		C9C1EE9D23E11C3D00D0B9DB /* Lot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1EE9C23E11C3D00D0B9DB /* Lot.swift */; };
+		C9C1EE9F23E11C5500D0B9DB /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1EE9E23E11C5500D0B9DB /* Spot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,8 @@
 		C99DB88823C62CF8007B7884 /* SpotfindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotfindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99DB88C23C62CF8007B7884 /* SpotfindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotfindUITests.swift; sourceTree = "<group>"; };
 		C99DB88E23C62CF8007B7884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9C1EE9C23E11C3D00D0B9DB /* Lot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lot.swift; sourceTree = "<group>"; };
+		C9C1EE9E23E11C5500D0B9DB /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		D402F9BCC1E3E45AEA9A1B32 /* Pods_Spotfind_SpotfindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotfind_SpotfindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A04238184B1E785FED7501 /* Pods-Spotfind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotfind.release.xcconfig"; path = "Target Support Files/Pods-Spotfind/Pods-Spotfind.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,7 +165,6 @@
 				8384678089B773DC588DB0FE /* Pods-SpotfindTests.debug.xcconfig */,
 				173541E5CB38D0A82EAA8CB7 /* Pods-SpotfindTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -209,6 +212,8 @@
 		C967FADC23C63148009D48B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C9C1EE9A23E11B3700D0B9DB /* Lot */,
+				C9C1EE9B23E11B4200D0B9DB /* Spot */,
 				C967FADF23C63148009D48B5 /* FlightControl */,
 				C967FAE123C63148009D48B5 /* Message */,
 				C967FAE323C63148009D48B5 /* RequestPath */,
@@ -449,6 +454,22 @@
 				C99DB88E23C62CF8007B7884 /* Info.plist */,
 			);
 			path = SpotfindUITests;
+			sourceTree = "<group>";
+		};
+		C9C1EE9A23E11B3700D0B9DB /* Lot */ = {
+			isa = PBXGroup;
+			children = (
+				C9C1EE9C23E11C3D00D0B9DB /* Lot.swift */,
+			);
+			path = Lot;
+			sourceTree = "<group>";
+		};
+		C9C1EE9B23E11B4200D0B9DB /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+				C9C1EE9E23E11C5500D0B9DB /* Spot.swift */,
+			);
+			path = Spot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -702,6 +723,7 @@
 				C967FB1023C63148009D48B5 /* FetchingFrequency.swift in Sources */,
 				C967FB0F23C63148009D48B5 /* BaseRepo.swift in Sources */,
 				C967FB2223C63148009D48B5 /* ArrayExt.swift in Sources */,
+				C9C1EE9F23E11C5500D0B9DB /* Spot.swift in Sources */,
 				C967FB2C23C63148009D48B5 /* Utils.swift in Sources */,
 				C967FB1123C63148009D48B5 /* GeneralObjectRepo.swift in Sources */,
 				C967FB2823C63148009D48B5 /* JSON+Ext.swift in Sources */,
@@ -709,6 +731,7 @@
 				C967FB2623C63148009D48B5 /* URLResponse+Ext.swift in Sources */,
 				C99DB86D23C62CF7007B7884 /* SceneDelegate.swift in Sources */,
 				C967FB0C23C63148009D48B5 /* NetworkObject+VariableExtension.swift in Sources */,
+				C9C1EE9D23E11C3D00D0B9DB /* Lot.swift in Sources */,
 				C967FB1923C63148009D48B5 /* GeneralObject.swift in Sources */,
 				C967FB2A23C63148009D48B5 /* RealmExt.swift in Sources */,
 				C967FB1B23C63148009D48B5 /* UniqueObject.swift in Sources */,
