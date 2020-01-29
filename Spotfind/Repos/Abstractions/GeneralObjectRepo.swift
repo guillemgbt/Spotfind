@@ -99,7 +99,7 @@ class GeneralObjectRepo<T: GeneralObject>: BaseRepo {
         let realm = try! Realm()
 
         try! realm.write {
-            realm.add(objects, update: true)
+            realm.add(objects, update: .modified)
         }
     }
     
@@ -124,8 +124,8 @@ class GeneralObjectRepo<T: GeneralObject>: BaseRepo {
             }
             
             realm.delete(objectsToDelete)
-            
-            realm.add(objects, update: true)
+                        
+            realm.add(objects, update: .modified)
         }
         
     }

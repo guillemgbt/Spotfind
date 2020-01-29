@@ -12,7 +12,7 @@ import SwiftyJSON
 
 
 class Lot: GeneralObject {
-    
+        
     @objc dynamic var name: String = ""
     @objc dynamic var image: String = ""
     let occupancy = RealmOptional<Float>()
@@ -36,7 +36,7 @@ class Lot: GeneralObject {
     }
     
     convenience init(id: String, name: String, image: String, occupancy: Float?, tendency: String, created: Date, updated: Date) {
-        
+                
         self.init(pk: id, created: created)
         self.name = name
         self.image = image
@@ -44,4 +44,5 @@ class Lot: GeneralObject {
         self.tendency = tendency
         self.updatedAt = updated
     }
+    
 }

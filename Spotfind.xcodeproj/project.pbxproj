@@ -48,6 +48,8 @@
 		C99DB87723C62CF8007B7884 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C99DB87523C62CF8007B7884 /* LaunchScreen.storyboard */; };
 		C99DB88223C62CF8007B7884 /* SpotfindTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99DB88123C62CF8007B7884 /* SpotfindTests.swift */; };
 		C99DB88D23C62CF8007B7884 /* SpotfindUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99DB88C23C62CF8007B7884 /* SpotfindUITests.swift */; };
+		C9A2AAFC23E1FE25009BC6B3 /* LotRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A2AAFB23E1FE25009BC6B3 /* LotRepo.swift */; };
+		C9A2AAFF23E1FE64009BC6B3 /* SpotRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A2AAFE23E1FE64009BC6B3 /* SpotRepo.swift */; };
 		C9C1EE9D23E11C3D00D0B9DB /* Lot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1EE9C23E11C3D00D0B9DB /* Lot.swift */; };
 		C9C1EE9F23E11C5500D0B9DB /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1EE9E23E11C5500D0B9DB /* Spot.swift */; };
 /* End PBXBuildFile section */
@@ -121,6 +123,8 @@
 		C99DB88823C62CF8007B7884 /* SpotfindUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotfindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99DB88C23C62CF8007B7884 /* SpotfindUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotfindUITests.swift; sourceTree = "<group>"; };
 		C99DB88E23C62CF8007B7884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9A2AAFB23E1FE25009BC6B3 /* LotRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotRepo.swift; sourceTree = "<group>"; };
+		C9A2AAFE23E1FE64009BC6B3 /* SpotRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRepo.swift; sourceTree = "<group>"; };
 		C9C1EE9C23E11C3D00D0B9DB /* Lot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lot.swift; sourceTree = "<group>"; };
 		C9C1EE9E23E11C5500D0B9DB /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		D402F9BCC1E3E45AEA9A1B32 /* Pods_Spotfind_SpotfindUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotfind_SpotfindUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +185,8 @@
 		C967FACD23C63148009D48B5 /* Repos */ = {
 			isa = PBXGroup;
 			children = (
+				C9A2AAF923E1FDF2009BC6B3 /* LotRepo */,
+				C9A2AAFA23E1FDFF009BC6B3 /* SpotRepo */,
 				C967FACE23C63148009D48B5 /* FlightControlRepo */,
 				C967FAD523C63148009D48B5 /* Abstractions */,
 				C967FADB23C63148009D48B5 /* RequestStatus+VariableExtension.swift */,
@@ -456,6 +462,22 @@
 			path = SpotfindUITests;
 			sourceTree = "<group>";
 		};
+		C9A2AAF923E1FDF2009BC6B3 /* LotRepo */ = {
+			isa = PBXGroup;
+			children = (
+				C9A2AAFB23E1FE25009BC6B3 /* LotRepo.swift */,
+			);
+			path = LotRepo;
+			sourceTree = "<group>";
+		};
+		C9A2AAFA23E1FDFF009BC6B3 /* SpotRepo */ = {
+			isa = PBXGroup;
+			children = (
+				C9A2AAFE23E1FE64009BC6B3 /* SpotRepo.swift */,
+			);
+			path = SpotRepo;
+			sourceTree = "<group>";
+		};
 		C9C1EE9A23E11B3700D0B9DB /* Lot */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,12 +744,14 @@
 				C99DB86B23C62CF7007B7884 /* AppDelegate.swift in Sources */,
 				C967FB1023C63148009D48B5 /* FetchingFrequency.swift in Sources */,
 				C967FB0F23C63148009D48B5 /* BaseRepo.swift in Sources */,
+				C9A2AAFF23E1FE64009BC6B3 /* SpotRepo.swift in Sources */,
 				C967FB2223C63148009D48B5 /* ArrayExt.swift in Sources */,
 				C9C1EE9F23E11C5500D0B9DB /* Spot.swift in Sources */,
 				C967FB2C23C63148009D48B5 /* Utils.swift in Sources */,
 				C967FB1123C63148009D48B5 /* GeneralObjectRepo.swift in Sources */,
 				C967FB2823C63148009D48B5 /* JSON+Ext.swift in Sources */,
 				C967FB1323C63148009D48B5 /* SyncInterface.swift in Sources */,
+				C9A2AAFC23E1FE25009BC6B3 /* LotRepo.swift in Sources */,
 				C967FB2623C63148009D48B5 /* URLResponse+Ext.swift in Sources */,
 				C99DB86D23C62CF7007B7884 /* SceneDelegate.swift in Sources */,
 				C967FB0C23C63148009D48B5 /* NetworkObject+VariableExtension.swift in Sources */,

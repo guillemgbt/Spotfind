@@ -41,7 +41,7 @@ class Spot: GeneralObject {
     }
     
     override static func indexedProperties() -> [String] {
-        return ["pk", "is_free", "lot_id"]
+        return ["is_free", "lot_id"]
     }
 
 }

@@ -8,10 +8,11 @@ target 'Spotfind' do
   pod 'PullUpController'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'Kingfisher', '~> 5.0'
-  pod 'RealmSwift', '~> 3.13.1'
-  pod 'RxSwift', '~> 4.4.1'
-  pod 'RxCocoa', '~> 4.4.1'
-  pod 'RxRealm', '~> 0.7.6'
+  pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
+  pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxRealm'
   pod 'SwiftMessages', '~> 6.0.2'
 
   target 'SpotfindTests' do

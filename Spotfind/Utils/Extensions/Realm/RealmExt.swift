@@ -10,7 +10,7 @@ import RealmSwift
 
 extension Realm {
     
-    class func writeBlock(_ writeBlock: @escaping ()->()) {
+    static func writeBlock(_ writeBlock: @escaping ()->()) {
         let realm = try! Realm()
         
         try! realm.write {
