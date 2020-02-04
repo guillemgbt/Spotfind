@@ -43,5 +43,17 @@ class Spot: GeneralObject {
     override static func indexedProperties() -> [String] {
         return ["is_free", "lot_id"]
     }
+    
+    func getImageURL(api: API = API.shared) -> URL? {
+        return URL(string: api.completeImageURL(image))
+    }
+    
+    func getDescription() -> String {
+        return self.is_free ? "Free spot" : "Occupied spot"
+    }
+    
+    func getDetectionDate() -> Date {
+        return self.created
+    }
 
 }

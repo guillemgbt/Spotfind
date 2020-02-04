@@ -16,6 +16,21 @@ class SpotRepo: GeneralObjectRepo<Spot> {
 
     static let shared = SpotRepo()
     
+    func getSpots(for area: Lot) -> Results<Spot> {
+        return getSpots(for: area.getPK())
+    }
+    
+    func getSpots(for lotID: String) -> Results<Spot> {
+        let lotPredicate = NSPredicate(format: "lot_id == %@", lotID)
+        return getObjectResults(filteredBy: lotPredicate)
+    }
+    
+    func getSortdEvents(for lotID: String) -> Results<Spot> {
+        let lotPredicate = NSPredicate(format: "lot_id == %@", lotID)
+        return getSortedObjectResults(filteredBy: lotPredicate)
+    }
+    
+    
     override func fetch(withKey key: String, toUpdate networkObject: Variable<NetworkObject<Spot>?>) {
         
         networkObject.update(withNetworkStatus: .loading)

@@ -29,7 +29,7 @@ class Lot: GeneralObject {
                 image: json["image"].stringValue,
                 occupancy: json["occupancy"].float,
                 tendency: json["tendency"].stringValue,
-                created: json["updated"].stringValue.toDate() ?? Date(),
+                created: json["created"].stringValue.toDate() ?? Date(),
                 updated: json["updated"].stringValue.toDate() ?? Date())
 
         
@@ -43,6 +43,22 @@ class Lot: GeneralObject {
         self.occupancy.value = occupancy
         self.tendency = tendency
         self.updatedAt = updated
+    }
+    
+    @objc func getName() -> String {
+        return self.name
+    }
+    
+    func getImageURL(api: API = API.shared) -> URL? {
+        return URL(string: api.completeImageURL(image))
+    }
+    
+    func getRelativeOccupancy() -> Float? {
+        return self.occupancy.value
+    }
+    
+    @objc func getTendency() -> String {
+        return self.tendency
     }
     
 }
