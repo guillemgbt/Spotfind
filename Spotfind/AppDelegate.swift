@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         
-        LotRepo.shared.fetchList(networkState: Variable<NetworkRequestState>(.initial))
-        LotRepo.shared.fetch(withKey: "1", toUpdate: Variable(nil))
+        SpotRepo.shared.fetchList(withKey: "1", toUpdate: Variable(.initial))
+        SpotRepo.shared.fetch(withKey: "1", toUpdate: Variable(nil))
         
         return true
     }
