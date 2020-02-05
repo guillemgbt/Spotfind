@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 extension UIViewController {
     func getTopScreenPading() -> CGFloat? {
@@ -57,5 +59,39 @@ extension UIViewController {
             }
         }
     }
+    
+    func push(_ viewController: UIViewController, animated: Bool = true, in navigationController: UINavigationController? = nil) {
+        
+        (navigationController ?? self.navigationController)?.pushViewController(viewController, animated: animated)
+    }
+    
+    func observeForNavigation(to vcToPush: BehaviorRelay<UIViewController?>) -> Disposable {
+        return vcToPush.asObservable().observeOn(MainScheduler.asyncInstance).subscribe(onNext: { [weak self, weak vcToPush] vc in
+            guard let viewController = vc else { return }
+            self?.push(viewController)
+            vcToPush?.accept(nil)
+        })
+    }
+    
+    func observeForPresentation(to vcToPresent: BehaviorRelay<UIViewController?>,
+                                animated: Bool = true,
+                                completion: (() -> Void)? = nil) -> Disposable {
+        return vcToPresent.asObservable().bindInUI { [weak self, weak vcToPresent] vc in
+            guard let viewController = vc else { return }
+            self?.present(viewController, animated: animated, completion: completion)
+            vcToPresent?.accept(nil)
+        }
+    }
+    
+    func setRightNavigationItem(view: UIView) {
+        let item = UIBarButtonItem(customView: view)
+        self.navigationItem.setRightBarButton(item, animated: false)
+    }
+    
+    func setLeftNavigationItem(view: UIView) {
+        let item = UIBarButtonItem(customView: view)
+        self.navigationItem.setLeftBarButton(item, animated: false)
+    }
+    
 }
 

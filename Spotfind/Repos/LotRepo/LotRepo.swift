@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 import RxSwift
+import RxCocoa
 
 
 class LotRepo: GeneralObjectRepo<Lot> {
@@ -42,21 +43,21 @@ class LotRepo: GeneralObjectRepo<Lot> {
         
     }
     
-    func fetchList(networkState: Variable<NetworkRequestState>) {
+    func fetchList(networkState: BehaviorRelay<NetworkRequestState>) {
         
-        networkState.value = .loading
+        networkState.accept(.loading)
         
         api.get(requestPath: RequestPath(path: "lots/"), onSuccess: { (json) in
             
             let lots = json.arrayValue.compactMap { Lot(fromJSON: $0) }
             self.replaceStored(objects: lots)
             
-            networkState.value = .success
-            
+            networkState.accept(.success)
+
         }) { (description, _) in
             
             Utils.printDebug(sender: self, message: "error getting lots")
-            networkState.value = .error
+            networkState.accept(.error)
         }
         
     }

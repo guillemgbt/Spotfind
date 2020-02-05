@@ -141,3 +141,124 @@ extension Variable {
     
 }
 
+extension BehaviorRelay {
+    
+    /// Observes its own value and dispatches the updated value to the provided callbacks.
+    ///
+    /// - Parameter onObjectUpdate: Callback that dispatches the new updated NetworkObject's 'object' value (Only when it is not `nil`)
+    /// - Parameter onNetworkStatusUpdate: Callback that dispatches the new updated NetworkObject's 'networkStatus' value
+    /// - Parameter disposeBag: The 'DisposeBag' instance used by the observable
+    func observe<Object: BaseObject>(onObjectUpdate: @escaping (Object)->Void = {_ in },
+                                     onNetworkStatusUpdate: @escaping (NetworkRequestState)->Void = {_ in },
+                                     withDisposeBag disposeBag: DisposeBag)
+        where Element == NetworkObject<Object>? {
+            self.asObservable().subscribe(onNext: {networkObject in
+                
+                if networkObject == nil { return }
+                
+                //Notifies the new "networkStatus" value
+                onNetworkStatusUpdate(networkObject!.networkStatus)
+                
+                //Notifies the new "object" value (In vase it is not nil)
+                if let object = networkObject!.getObject() {
+                    onObjectUpdate(object)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    /// Helper method to bind observables and use them in the Main Thread for UI changes
+    ///
+    /// - Parameters:
+    ///   - callback: callback when observable is updated
+    ///   - bag: dispose bag where to put the observable instance and manage its memory
+    func bindInUI(_ callback: @escaping (Element)->(), disposedBy bag: DisposeBag) {
+        
+        self.asObservable().bind { (element) in
+            DispatchQueue.main.async {
+                callback(element)
+            }
+        }.disposed(by: bag)
+    }
+    
+    
+    func bindInMainScheduler(_ callback: @escaping (Element)->(), disposedBy bag: DisposeBag) {
+        
+        self.asObservable().observeOn(MainScheduler.asyncInstance).bind { (element) in
+            DispatchQueue.main.async {
+                callback(element)
+            }
+        }.disposed(by: bag)
+    }
+    
+    /// Encapsulated method for normal binding of observables. Used to have all binding code in one place just in case it is needed to be changed.
+    ///
+    /// - Parameters:
+    ///   - callback: called when object is updated
+    ///   - bag: dispose bag where to put the observable instance and manage its memory
+    func bind(_ callback: @escaping (Element)->(), disposedBy bag: DisposeBag) {
+        self.asObservable().bind { (element) in
+            callback(element)
+        }.disposed(by: bag)
+    }
+    
+    
+    /// Updates the NetworkObject's 'networkStatus' value, keeping the current 'objectId'.
+    ///
+    /// - Parameter networkStatus: The new 'networkStatus' value
+    func update<Object: BaseObject>(withNetworkStatus networkStatus: NetworkRequestState)
+        where Element == NetworkObject<Object>?{
+            self.update(withNetworkStatus: networkStatus, withObjectId: self.value?.objectId)
+    }
+    
+    /// Updates the NetworkObject's 'objectId' value, keeping the current 'networkStatus'.
+    ///
+    /// - Parameter objectId: The new 'objectId' value
+    func update<Object: BaseObject>(withObjectId objectId: String?)
+        where Element == NetworkObject<Object>?{
+            self.update(withNetworkStatus: self.value?.networkStatus ?? .initial, withObjectId: objectId)
+    }
+    
+    /// Updates both the NetworkObject's 'networkStatus' and 'objectId' values.
+    ///
+    /// - Parameter networkStatus: The new 'networkStatus' value
+    /// - Parameter objectId: The new 'objectId' value
+    func update<Object: BaseObject>(withNetworkStatus networkStatus: NetworkRequestState, withObjectId objectId: String?)
+        where Element == NetworkObject<Object>?{
+            self.accept(NetworkObject(networkStatus: networkStatus, objectId: objectId))
+    }
+    
+}
+
+extension Observable {
+    
+    func observeInUI(onNext: @escaping (Element)->Void) -> Disposable{
+        return self.subscribe(onNext: { element in
+            DispatchQueue.main.async {
+                onNext(element)
+            }
+        })
+    }
+    
+    /// Helper method to bind observables and use them in the Main Thread for UI changes
+    ///
+    /// - Parameters:
+    ///   - callback: callback when observable is updated
+    ///   - bag: dispose bag where to put the observable instance and manage its memory
+    func bindInUI(_ callback: @escaping (Element)->()) -> Disposable {
+        return self.bind { (element) in
+            DispatchQueue.main.async {
+                callback(element)
+            }
+        }
+    }
+    
+    
+    func bindInMainScheduler(_ callback: @escaping (Element)->()) -> Disposable {
+        
+        return self.observeOn(MainScheduler.asyncInstance).bind { (element) in
+            DispatchQueue.main.async {
+                callback(element)
+            }
+        }
+    }
+}
