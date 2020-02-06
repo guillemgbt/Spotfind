@@ -51,6 +51,8 @@
 		C9A2AAFF23E1FE64009BC6B3 /* SpotRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A2AAFE23E1FE64009BC6B3 /* SpotRepo.swift */; };
 		C9C1EE9D23E11C3D00D0B9DB /* Lot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1EE9C23E11C3D00D0B9DB /* Lot.swift */; };
 		C9C1EE9F23E11C5500D0B9DB /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C1EE9E23E11C5500D0B9DB /* Spot.swift */; };
+		C9C6E69B23EB987A001E49D9 /* LotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C6E69923EB987A001E49D9 /* LotCell.swift */; };
+		C9C6E69C23EB987A001E49D9 /* LotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C6E69A23EB987A001E49D9 /* LotCell.xib */; };
 		C9F10ABD23EA05C60067F2F6 /* SFNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F10ABC23EA05C60067F2F6 /* SFNavigationViewController.swift */; };
 		C9F10AC023EA06370067F2F6 /* LotListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F10ABE23EA06370067F2F6 /* LotListViewController.swift */; };
 		C9F10AC123EA06370067F2F6 /* LotListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F10ABF23EA06370067F2F6 /* LotListViewController.xib */; };
@@ -129,6 +131,8 @@
 		C9A2AAFE23E1FE64009BC6B3 /* SpotRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRepo.swift; sourceTree = "<group>"; };
 		C9C1EE9C23E11C3D00D0B9DB /* Lot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lot.swift; sourceTree = "<group>"; };
 		C9C1EE9E23E11C5500D0B9DB /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
+		C9C6E69923EB987A001E49D9 /* LotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotCell.swift; sourceTree = "<group>"; };
+		C9C6E69A23EB987A001E49D9 /* LotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LotCell.xib; sourceTree = "<group>"; };
 		C9F10ABC23EA05C60067F2F6 /* SFNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNavigationViewController.swift; sourceTree = "<group>"; };
 		C9F10ABE23EA06370067F2F6 /* LotListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotListViewController.swift; sourceTree = "<group>"; };
 		C9F10ABF23EA06370067F2F6 /* LotListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LotListViewController.xib; sourceTree = "<group>"; };
@@ -548,6 +552,8 @@
 		C9F10ABA23EA05700067F2F6 /* Lot */ = {
 			isa = PBXGroup;
 			children = (
+				C9C6E69923EB987A001E49D9 /* LotCell.swift */,
+				C9C6E69A23EB987A001E49D9 /* LotCell.xib */,
 			);
 			path = Lot;
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9F10AC123EA06370067F2F6 /* LotListViewController.xib in Resources */,
+				C9C6E69C23EB987A001E49D9 /* LotCell.xib in Resources */,
 				C99DB87723C62CF8007B7884 /* LaunchScreen.storyboard in Resources */,
 				C99DB87423C62CF8007B7884 /* Assets.xcassets in Resources */,
 				C99DB87223C62CF7007B7884 /* Main.storyboard in Resources */,
@@ -806,6 +813,7 @@
 				C967FB1F23C63148009D48B5 /* CollectionViewExt.swift in Sources */,
 				C967FB2923C63148009D48B5 /* MapViewExt.swift in Sources */,
 				C967FB1423C63148009D48B5 /* RequestStatus+VariableExtension.swift in Sources */,
+				C9C6E69B23EB987A001E49D9 /* LotCell.swift in Sources */,
 				C9F10AC323EA06B60067F2F6 /* LotListViewModel.swift in Sources */,
 				C99DB86B23C62CF7007B7884 /* AppDelegate.swift in Sources */,
 				C967FB1023C63148009D48B5 /* FetchingFrequency.swift in Sources */,

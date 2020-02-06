@@ -47,6 +47,7 @@ class LotListViewModel: NSObject {
     }
     
     func requestLots() {
+        guard requestState.value != .loading else { return }
         lotRepo.fetchList(networkState: requestState)
     }
     

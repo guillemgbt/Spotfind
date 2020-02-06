@@ -22,6 +22,8 @@ class LotListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setTableView()
+        setNavigationBarItems()
         bindObservables()
         viewModel.requestLots()
     }
@@ -29,6 +31,15 @@ class LotListViewController: UIViewController {
     private func setTableView() {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80
+        tableView.registerNib(LotCell.self)
+        setPullToRefresh()
+    }
+    
+    private func setPullToRefresh() {
+        let control = UIRefreshControl()
+        control.addTarget(self, action: #selector(onPullToRefresh(_:)),
+                          for: .valueChanged)
+        tableView.refreshControl = control
     }
     
     private func setNavigationBarItems() {
@@ -53,8 +64,9 @@ class LotListViewController: UIViewController {
         viewModel.lotsObservable()
             .bind(to: tableView.rx.items) {tableView, row, lot in
             
-                let cell = UITableViewCell()
-                cell.textLabel?.text = lot.getName()
+                let cell: LotCell = tableView.dequeueReusableCell(for: IndexPath(row: row,
+                                                                                 section: 0))
+                cell.set(with: lot)
                 return cell
             }
             .disposed(by: bag)
@@ -70,6 +82,13 @@ class LotListViewController: UIViewController {
         viewModel.isLoadingObservable()
             .bind(to: activityIndicator.rx.isAnimating)
             .disposed(by: bag)
+        
+        viewModel.isLoadingObservable().bindInUI { [weak self] (isLoading) in
+            if isLoading && self?.tableView.refreshControl?.isRefreshing ?? false {
+                self?.tableView.refreshControl?.endRefreshing()
+            }
+        }.disposed(by: bag)
+        
     }
     
     private func bindError() {
@@ -79,6 +98,10 @@ class LotListViewController: UIViewController {
                                   message: "Please, pull to refresh data.")
             }
         }.disposed(by: bag)
+    }
+    
+    @objc private func onPullToRefresh(_ sender: Any) {
+        viewModel.requestLots()
     }
     
 

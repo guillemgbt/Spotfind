@@ -61,4 +61,6 @@ class Lot: GeneralObject {
         return self.tendency
     }
     
+    
+    
 }
