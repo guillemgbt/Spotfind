@@ -10,6 +10,9 @@
 		50FB528E606C532281A4256A /* Pods_SpotfindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8104AF122F3B1B5AC20E7D79 /* Pods_SpotfindTests.framework */; };
 		564DD8AFF86B0FB131A0FFDA /* Pods_Spotfind_SpotfindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D402F9BCC1E3E45AEA9A1B32 /* Pods_Spotfind_SpotfindUITests.framework */; };
 		88775A8031986B11668E36A7 /* Pods_Spotfind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52909856677BF573595F801 /* Pods_Spotfind.framework */; };
+		C93E72B923EBAAA900DCCE5C /* LotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E72B723EBAAA900DCCE5C /* LotDetailViewController.swift */; };
+		C93E72BA23EBAAA900DCCE5C /* LotDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93E72B823EBAAA900DCCE5C /* LotDetailViewController.xib */; };
+		C93E72BC23EBAABF00DCCE5C /* LotDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E72BB23EBAABF00DCCE5C /* LotDetailViewModel.swift */; };
 		C967FB0B23C63148009D48B5 /* FlightControlRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C967FACF23C63148009D48B5 /* FlightControlRepo.swift */; };
 		C967FB0C23C63148009D48B5 /* NetworkObject+VariableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C967FAD023C63148009D48B5 /* NetworkObject+VariableExtension.swift */; };
 		C967FB0F23C63148009D48B5 /* BaseRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C967FAD623C63148009D48B5 /* BaseRepo.swift */; };
@@ -84,6 +87,9 @@
 		8384678089B773DC588DB0FE /* Pods-SpotfindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotfindTests.debug.xcconfig"; path = "Target Support Files/Pods-SpotfindTests/Pods-SpotfindTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A52909856677BF573595F801 /* Pods_Spotfind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotfind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0981D3600753C05A9CF068 /* Pods-Spotfind-SpotfindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotfind-SpotfindUITests.release.xcconfig"; path = "Target Support Files/Pods-Spotfind-SpotfindUITests/Pods-Spotfind-SpotfindUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C93E72B723EBAAA900DCCE5C /* LotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotDetailViewController.swift; sourceTree = "<group>"; };
+		C93E72B823EBAAA900DCCE5C /* LotDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LotDetailViewController.xib; sourceTree = "<group>"; };
+		C93E72BB23EBAABF00DCCE5C /* LotDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotDetailViewModel.swift; sourceTree = "<group>"; };
 		C967FACF23C63148009D48B5 /* FlightControlRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightControlRepo.swift; sourceTree = "<group>"; };
 		C967FAD023C63148009D48B5 /* NetworkObject+VariableExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkObject+VariableExtension.swift"; sourceTree = "<group>"; };
 		C967FAD623C63148009D48B5 /* BaseRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRepo.swift; sourceTree = "<group>"; };
@@ -536,6 +542,9 @@
 		C9F10AB823EA05560067F2F6 /* LotDetail */ = {
 			isa = PBXGroup;
 			children = (
+				C93E72B723EBAAA900DCCE5C /* LotDetailViewController.swift */,
+				C93E72B823EBAAA900DCCE5C /* LotDetailViewController.xib */,
+				C93E72BB23EBAABF00DCCE5C /* LotDetailViewModel.swift */,
 			);
 			path = LotDetail;
 			sourceTree = "<group>";
@@ -675,6 +684,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9F10AC123EA06370067F2F6 /* LotListViewController.xib in Resources */,
+				C93E72BA23EBAAA900DCCE5C /* LotDetailViewController.xib in Resources */,
 				C9C6E69C23EB987A001E49D9 /* LotCell.xib in Resources */,
 				C99DB87723C62CF8007B7884 /* LaunchScreen.storyboard in Resources */,
 				C99DB87423C62CF8007B7884 /* Assets.xcassets in Resources */,
@@ -815,6 +825,7 @@
 				C967FB1423C63148009D48B5 /* RequestStatus+VariableExtension.swift in Sources */,
 				C9C6E69B23EB987A001E49D9 /* LotCell.swift in Sources */,
 				C9F10AC323EA06B60067F2F6 /* LotListViewModel.swift in Sources */,
+				C93E72BC23EBAABF00DCCE5C /* LotDetailViewModel.swift in Sources */,
 				C99DB86B23C62CF7007B7884 /* AppDelegate.swift in Sources */,
 				C967FB1023C63148009D48B5 /* FetchingFrequency.swift in Sources */,
 				C967FB0F23C63148009D48B5 /* BaseRepo.swift in Sources */,
@@ -842,6 +853,7 @@
 				C967FB2323C63148009D48B5 /* DateOffset.swift in Sources */,
 				C967FB2523C63148009D48B5 /* Extensions.swift in Sources */,
 				C967FB0B23C63148009D48B5 /* FlightControlRepo.swift in Sources */,
+				C93E72B923EBAAA900DCCE5C /* LotDetailViewController.swift in Sources */,
 				C967FB2723C63148009D48B5 /* UIViewController+Extensions.swift in Sources */,
 				C967FB1823C63148009D48B5 /* RequestPath.swift in Sources */,
 				C967FB2B23C63148009D48B5 /* API.swift in Sources */,

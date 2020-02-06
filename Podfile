@@ -14,6 +14,7 @@ target 'Spotfind' do
   pod 'RxCocoa'
   pod 'RxRealm'
   pod 'SwiftMessages', '~> 6.0.2'
+  pod "MXParallaxHeader"
 
   target 'SpotfindTests' do
     inherit! :search_paths
