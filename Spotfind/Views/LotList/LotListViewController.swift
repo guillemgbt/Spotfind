@@ -51,6 +51,7 @@ class LotListViewController: UIViewController {
         bindLots()
         bindLoading()
         bindError()
+        bindVCtoPush()
     }
     
     private func bindTitle() {
@@ -98,6 +99,10 @@ class LotListViewController: UIViewController {
                                   message: "Please, pull to refresh data.")
             }
         }.disposed(by: bag)
+    }
+    
+    private func bindVCtoPush() {
+        observeForNavigation(to: viewModel.vcToPush).disposed(by: bag)
     }
     
     @objc private func onPullToRefresh(_ sender: Any) {

@@ -19,8 +19,8 @@ class LotListViewModel: NSObject {
     
     private let title: BehaviorRelay<String> = BehaviorRelay(value: "Spotfind")
     private let requestState: BehaviorRelay<NetworkRequestState> = BehaviorRelay(value: .initial)
-    private let vcToPresent: BehaviorRelay<UIViewController?> = BehaviorRelay(value: nil)
-    private let vcToPush: BehaviorRelay<UIViewController?> = BehaviorRelay(value: nil)
+    let vcToPresent: BehaviorRelay<UIViewController?> = BehaviorRelay(value: nil)
+    let vcToPush: BehaviorRelay<UIViewController?> = BehaviorRelay(value: nil)
     private let lots: Results<Lot>
 
     
@@ -53,6 +53,7 @@ class LotListViewModel: NSObject {
     
     func handleLotSelection(at indexPath: IndexPath) {
         Utils.printDebug(sender: self, message: "Selected \(indexPath.row)")
+        vcToPush.accept(LotDetailViewController(lotID: lots[indexPath.row].getPK()))
     }
 
 }

@@ -12,27 +12,23 @@ class SFNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationBar.prefersLargeTitles = true
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
-        updateLargeTitles()
+        updateLargeTitles(in: viewController)
     }
     
-    override func popViewController(animated: Bool) -> UIViewController? {
-        let vc = super.popViewController(animated: animated)
-        updateLargeTitles()
-        return vc
-    }
     
-    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
-        let vc = super.popToRootViewController(animated: animated)
-        updateLargeTitles()
-        return vc
-    }
-    
-    private func updateLargeTitles() {
-        self.navigationBar.prefersLargeTitles = viewControllers.count < 2
+    private func updateLargeTitles(in vc: UIViewController?) {
+        
+        let mode = viewControllers.count < 2 ?
+            UINavigationItem.LargeTitleDisplayMode.always :
+            UINavigationItem.LargeTitleDisplayMode.never
+        
+        vc?.navigationItem.largeTitleDisplayMode = mode
+        
     }
 
 
