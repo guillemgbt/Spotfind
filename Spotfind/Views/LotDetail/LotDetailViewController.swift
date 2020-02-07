@@ -26,8 +26,12 @@ class LotDetailViewController: UIViewController {
     @IBOutlet weak var minHeightView: UIView!
     @IBOutlet weak var spotSwitch: UISwitch!
     
+    let viewModel: LotDetailViewModel
+    let bag = DisposeBag()
+    
     
     init(lotID: String) {
+        self.viewModel = LotDetailViewModel(lotID: lotID)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,7 +46,41 @@ class LotDetailViewController: UIViewController {
         
         setParallaxHeader()
         setUI()
+        bindObservables()
         
+        viewModel.fetchLot()
+    }
+    
+    private func bindObservables() {
+        bindName()
+        bindOccupancy()
+        bindTendency()
+        bindLotImage()
+    }
+    
+    private func bindName() {
+        viewModel.nameObservable().bindInUI { [weak self] name in
+            self?.lotNameLabel.text = name
+            self?.title = name
+        }.disposed(by: bag)
+    }
+    
+    private func bindOccupancy() {
+        viewModel.occupancyObservable().bindInUI { [weak self] occupancy in
+            self?.occupancyLabel.text = occupancy
+        }.disposed(by: bag)
+    }
+    
+    private func bindTendency() {
+        viewModel.tendencyIconObservable().bindInUI { [weak self] icon in
+            self?.tendencyIconImage.loadImage(withImage: icon)
+        }.disposed(by: bag)
+    }
+    
+    private func bindLotImage() {
+        viewModel.lotImageURLObservable().bindInUI { [weak self] imageURL in
+            self?.lotImageView.loadImage(withURL: imageURL)
+        }.disposed(by: bag)
     }
     
     private func setUI() {
@@ -56,6 +94,11 @@ class LotDetailViewController: UIViewController {
         tableView.parallaxHeader.height = 400
         tableView.parallaxHeader.minimumHeight = minHeightView.bounds.height
         tableView.parallaxHeader.mode = .fill
+    }
+    
+    @IBAction func onSwitchChanged(_ sender: Any) {
+        Utils.printDebug(sender: self, message: "switch changed")
+        viewModel.fetchLot()
     }
 }
 

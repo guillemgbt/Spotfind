@@ -17,7 +17,7 @@ class LotRepo: GeneralObjectRepo<Lot> {
     
     static let shared = LotRepo()
     
-    override func fetch(withKey key: String, toUpdate networkObject: Variable<NetworkObject<Lot>?>) {
+    override func fetch(withKey key: String, toUpdate networkObject: BehaviorRelay<NetworkObject<Lot>?>) {
         
         networkObject.update(withNetworkStatus: .loading)
         

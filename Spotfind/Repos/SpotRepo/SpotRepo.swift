@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import RxSwift
+import RxCocoa
 import SwiftyJSON
 
 
@@ -31,7 +32,7 @@ class SpotRepo: GeneralObjectRepo<Spot> {
     }
     
     
-    override func fetch(withKey key: String, toUpdate networkObject: Variable<NetworkObject<Spot>?>) {
+    override func fetch(withKey key: String, toUpdate networkObject: BehaviorRelay<NetworkObject<Spot>?>) {
         
         networkObject.update(withNetworkStatus: .loading)
         
@@ -57,21 +58,21 @@ class SpotRepo: GeneralObjectRepo<Spot> {
         
     }
     
-    override func fetchList(withKey key: String, toUpdate networkState: Variable<NetworkRequestState>) {
-        
-        networkState.value = .loading
+    override func fetchList(withKey key: String, toUpdate networkState: BehaviorRelay<NetworkRequestState>) {
+                
+        networkState.accept(.loading)
         
         api.get(requestPath: RequestPath(path: "lot/\(key)/spots/"), onSuccess: { (json) in
             
             let spots = json.arrayValue.compactMap { Spot(fromJSON: $0) }
             self.replaceLotSpots(spots, lotID: key)
             
-            networkState.value = .success
-            
+            networkState.accept(.success)
+
         }) { (description, _) in
             
             Utils.printDebug(sender: self, message: "error getting lots")
-            networkState.value = .error
+            networkState.accept(.error)
         }
         
     }

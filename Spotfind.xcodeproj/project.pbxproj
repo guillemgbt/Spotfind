@@ -10,6 +10,7 @@
 		50FB528E606C532281A4256A /* Pods_SpotfindTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8104AF122F3B1B5AC20E7D79 /* Pods_SpotfindTests.framework */; };
 		564DD8AFF86B0FB131A0FFDA /* Pods_Spotfind_SpotfindUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D402F9BCC1E3E45AEA9A1B32 /* Pods_Spotfind_SpotfindUITests.framework */; };
 		88775A8031986B11668E36A7 /* Pods_Spotfind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52909856677BF573595F801 /* Pods_Spotfind.framework */; };
+		C936D27023ECF4FE004E2FD1 /* Tendency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C936D26F23ECF4FE004E2FD1 /* Tendency.swift */; };
 		C93E72B923EBAAA900DCCE5C /* LotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E72B723EBAAA900DCCE5C /* LotDetailViewController.swift */; };
 		C93E72BA23EBAAA900DCCE5C /* LotDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C93E72B823EBAAA900DCCE5C /* LotDetailViewController.xib */; };
 		C93E72BC23EBAABF00DCCE5C /* LotDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E72BB23EBAABF00DCCE5C /* LotDetailViewModel.swift */; };
@@ -87,6 +88,7 @@
 		8384678089B773DC588DB0FE /* Pods-SpotfindTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotfindTests.debug.xcconfig"; path = "Target Support Files/Pods-SpotfindTests/Pods-SpotfindTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A52909856677BF573595F801 /* Pods_Spotfind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotfind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0981D3600753C05A9CF068 /* Pods-Spotfind-SpotfindUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotfind-SpotfindUITests.release.xcconfig"; path = "Target Support Files/Pods-Spotfind-SpotfindUITests/Pods-Spotfind-SpotfindUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C936D26F23ECF4FE004E2FD1 /* Tendency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tendency.swift; sourceTree = "<group>"; };
 		C93E72B723EBAAA900DCCE5C /* LotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotDetailViewController.swift; sourceTree = "<group>"; };
 		C93E72B823EBAAA900DCCE5C /* LotDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LotDetailViewController.xib; sourceTree = "<group>"; };
 		C93E72BB23EBAABF00DCCE5C /* LotDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotDetailViewModel.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				C9C1EE9C23E11C3D00D0B9DB /* Lot.swift */,
+				C936D26F23ECF4FE004E2FD1 /* Tendency.swift */,
 			);
 			path = Lot;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 				C967FB2323C63148009D48B5 /* DateOffset.swift in Sources */,
 				C967FB2523C63148009D48B5 /* Extensions.swift in Sources */,
 				C967FB0B23C63148009D48B5 /* FlightControlRepo.swift in Sources */,
+				C936D27023ECF4FE004E2FD1 /* Tendency.swift in Sources */,
 				C93E72B923EBAAA900DCCE5C /* LotDetailViewController.swift in Sources */,
 				C967FB2723C63148009D48B5 /* UIViewController+Extensions.swift in Sources */,
 				C967FB1823C63148009D48B5 /* RequestPath.swift in Sources */,

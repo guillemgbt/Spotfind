@@ -28,6 +28,17 @@ class LotListViewController: UIViewController {
         viewModel.requestLots()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        deselectRowsIfNeeded()
+    }
+    
+    private func deselectRowsIfNeeded() {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
     private func setTableView() {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80

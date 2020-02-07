@@ -27,7 +27,9 @@ class LotCell: UITableViewCell, NibLoadableView {
     func set(with lot: Lot) {
         self.lotImageView.loadImage(withURL: lot.getImageURL())
         self.lotNameLabel.text = lot.getName()
-        self.lotDetailLabel.text = "\(lot.getRelativeOccupancy() ?? 0.0)% at \(lot.lastUpdate().formatToHHdMMMYYYYSS()) "
+        
+        let occStr = String(format: "%.0f", (lot.getRelativeOccupancy() ?? 0.0)*100)
+        self.lotDetailLabel.text = occStr+"% at \(lot.lastUpdate().formatToHHdMMMYYYYSS())"
     }
 
 }

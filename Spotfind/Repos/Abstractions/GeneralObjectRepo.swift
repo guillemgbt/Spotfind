@@ -8,12 +8,13 @@
 
 import RealmSwift
 import RxSwift
+import RxCocoa
 import SwiftyJSON
 
 class GeneralObjectRepo<T: GeneralObject>: BaseRepo {
     
     // MARK: - [NextRefactor]: Status included in each attribute of the class that request server data e.g. NetworkBoundModel (including network state and data as observables)
-    var fetchingStatus: Variable<NetworkRequestState> = Variable(.initial)
+    var fetchingStatus: BehaviorRelay<NetworkRequestState> = BehaviorRelay(value: .initial)
     
     func getObject(byPK pk: String) -> T? {
         let realm = try! Realm()
@@ -35,7 +36,7 @@ class GeneralObjectRepo<T: GeneralObject>: BaseRepo {
     }
     
     
-    func fetchNetworkObject(withPK pk: String, withFetchingFrequency fetchingFrequency: FetchingFrequency, networkObjectObservable: Variable<NetworkObject<T>?>) {
+    func fetchNetworkObject(withPK pk: String, withFetchingFrequency fetchingFrequency: FetchingFrequency, networkObjectObservable: BehaviorRelay<NetworkObject<T>?>) {
         
         //Initialising the value (networkObject) of the observable.
         //This will trigger an binding update for the newtworkStatus and object if in DB
@@ -76,11 +77,11 @@ class GeneralObjectRepo<T: GeneralObject>: BaseRepo {
     
     func fetch() {} //To override
     
-    func fetch(withKey key: String, toUpdate networkObject: Variable<NetworkObject<T>?>) {} //To override
+    func fetch(withKey key: String, toUpdate networkObject: BehaviorRelay<NetworkObject<T>?>) {} //To override
     
     //As we request a list of multiple objects, the element "Results" of Realm is the observable itself of the data.
     //Then we only need to update the network state for a particular call
-    func fetchList(withKey key: String, toUpdate networkState: Variable<NetworkRequestState>) {} //To override
+    func fetchList(withKey key: String, toUpdate networkState: BehaviorRelay<NetworkRequestState>) {} //To override
 
     
     func networkObservable(forState state: NetworkRequestState) -> Observable<Bool> {
