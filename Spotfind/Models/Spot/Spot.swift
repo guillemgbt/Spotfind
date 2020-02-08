@@ -24,7 +24,7 @@ class Spot: GeneralObject {
         }
         
         self.init(id: "\(id)",
-                  image: json["title"].stringValue.html2String,
+                  image: json["image"].stringValue.html2String,
                   is_free: json["is_free"].boolValue,
                   lot_id: json["lot_id"].stringValue,
                   created: json["created"].stringValue.toDate() ?? Date())

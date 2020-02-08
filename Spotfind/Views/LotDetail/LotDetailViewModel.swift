@@ -24,7 +24,12 @@ class LotDetailViewModel: NSObject {
     private let occupancy: BehaviorRelay<String> = BehaviorRelay(value: "")
     private let tendencyIcon: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     private let lotImageURL: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
-
+    
+    private var spots: Results<Spot>
+    private let spotsRequest: BehaviorRelay<NetworkRequestState> = BehaviorRelay(value: .initial)
+    private let isFilteringSpots: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    
+    private var timer: Timer?
     
     init(lotID: String,
          lotRepo: LotRepo = LotRepo.shared,
@@ -34,10 +39,15 @@ class LotDetailViewModel: NSObject {
         self.lotRepo = lotRepo
         self.spotRepo = spotRepo
         self.lotNetworkObject = BehaviorRelay(value: nil)
+        self.spots = spotRepo.getFreeSpots(for: lotID)
         super.init()
         
         bindNetworkObject()
-        
+        setRequestTimer()
+    }
+    
+    deinit {
+        Utils.printDebug(sender: self, message: "deinit")
     }
     
     private func bindNetworkObject() {
@@ -55,17 +65,26 @@ class LotDetailViewModel: NSObject {
                 self?.tendencyIcon.accept(tendency.icon)
             }
             
-        }, onNetworkStatusUpdate: { (networkStatus) in
+        }, onNetworkStatusUpdate: { [weak self] (networkStatus) in
             Utils.printDebug(sender: self, message: "lot request state: \(networkStatus)")
         }, withDisposeBag: bag)
                 
     }
     
-    func fetchLot() {
+    private func setRequestTimer() {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: true, block: { [weak self] _ in
+            self?.fetchData()
+        })
+    }
+    
+    func fetchData() {
         
         lotRepo.fetchNetworkObject(withPK: lotID,
                                    withFetchingFrequency: .always,
                                    networkObjectObservable: lotNetworkObject)
+        
+        spotRepo.fetchList(withKey: lotID,
+                           toUpdate: spotsRequest)
     }
     
     func nameObservable() -> Observable<String> {
@@ -82,6 +101,24 @@ class LotDetailViewModel: NSObject {
     
     func lotImageURLObservable() -> Observable<URL?> {
         return lotImageURL.asObservable()
+    }
+    
+    func spotsObservable() -> Observable<Results<Spot>> {
+        return Observable.collection(from: spots)
+    }
+    
+    func isFilteringObservable() -> Observable<Bool> {
+        return isFilteringSpots.asObservable()
+    }
+    
+    func handleSwitch(active: Bool) {
+        if active {
+            spots = spotRepo.getFreeSpots(for: lotID)
+        } else {
+            spots = spotRepo.getSpots(for: lotID)
+        }
+        
+        isFilteringSpots.accept(active)
     }
 
 }

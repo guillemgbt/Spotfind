@@ -41,14 +41,13 @@ class LotDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.dataSource = self
         
         setParallaxHeader()
+        setTableView()
         setUI()
         bindObservables()
         
-        viewModel.fetchLot()
+        viewModel.fetchData()
     }
     
     private func bindObservables() {
@@ -56,6 +55,14 @@ class LotDetailViewController: UIViewController {
         bindOccupancy()
         bindTendency()
         bindLotImage()
+        bindIsFiltering()
+        bindLots()
+    }
+    
+    private func setTableView() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 80
+        tableView.registerNib(SpotCell.self)
     }
     
     private func bindName() {
@@ -83,6 +90,26 @@ class LotDetailViewController: UIViewController {
         }.disposed(by: bag)
     }
     
+    private func bindIsFiltering() {
+        viewModel.isFilteringObservable().skip(1).bindInUI { [weak self] _ in
+            self?.tableView.dataSource = nil
+            self?.bindLots()
+        }.disposed(by: bag)
+    }
+    
+    private func bindLots() {
+        
+        viewModel.spotsObservable()
+            .bind(to: tableView.rx.items) {tableView, row, spot in
+            
+                let cell: SpotCell = tableView.dequeueReusableCell(for: IndexPath(row: row,
+                                                                                 section: 0))
+                cell.set(with: spot)
+                return cell
+            }
+            .disposed(by: bag)
+    }
+    
     private func setUI() {
         panelView.makeRound(radiusPoints: 8)
         panelView.setSuperPosedShadow()
@@ -98,21 +125,6 @@ class LotDetailViewController: UIViewController {
     
     @IBAction func onSwitchChanged(_ sender: Any) {
         Utils.printDebug(sender: self, message: "switch changed")
-        viewModel.fetchLot()
+        viewModel.handleSwitch(active: spotSwitch.isOn)
     }
-}
-
-
-extension LotDetailViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "Row \(indexPath.row)"
-        return cell
-    }
-    
-    
 }

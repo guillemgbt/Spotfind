@@ -26,7 +26,12 @@ class SpotRepo: GeneralObjectRepo<Spot> {
         return getObjectResults(filteredBy: lotPredicate)
     }
     
-    func getSortdEvents(for lotID: String) -> Results<Spot> {
+    func getFreeSpots(for lotID: String) -> Results<Spot> {
+        let freePredicate = NSPredicate(format: "is_free == true")
+        return getSpots(for: lotID).filter(freePredicate)
+    }
+    
+    func getSortdSpots(for lotID: String) -> Results<Spot> {
         let lotPredicate = NSPredicate(format: "lot_id == %@", lotID)
         return getSortedObjectResults(filteredBy: lotPredicate)
     }
