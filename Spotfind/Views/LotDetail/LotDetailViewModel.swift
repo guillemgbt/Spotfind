@@ -17,6 +17,7 @@ class LotDetailViewModel: NSObject {
     private let lotID: String
     private let lotRepo: LotRepo
     private let spotRepo: SpotRepo
+    private let flightRepo: FlightControlRepo
     private let lotNetworkObject: BehaviorRelay<NetworkObject<Lot>?>
     private let bag = DisposeBag()
     
@@ -33,11 +34,13 @@ class LotDetailViewModel: NSObject {
     
     init(lotID: String,
          lotRepo: LotRepo = LotRepo.shared,
-         spotRepo: SpotRepo = SpotRepo.shared) {
+         spotRepo: SpotRepo = SpotRepo.shared,
+         flightRepo: FlightControlRepo = FlightControlRepo.shared) {
         
         self.lotID = lotID
         self.lotRepo = lotRepo
         self.spotRepo = spotRepo
+        self.flightRepo = flightRepo
         self.lotNetworkObject = BehaviorRelay(value: nil)
         self.spots = spotRepo.getFreeSpots(for: lotID)
         super.init()
@@ -109,6 +112,14 @@ class LotDetailViewModel: NSObject {
     
     func isFilteringObservable() -> Observable<Bool> {
         return isFilteringSpots.asObservable()
+    }
+    
+    func requestFlightStart() {
+        flightRepo.requestStart(for: lotID)
+    }
+    
+    func requestFlightStop() {
+        flightRepo.requestStop(for: lotID)
     }
     
     func handleSwitch(active: Bool) {

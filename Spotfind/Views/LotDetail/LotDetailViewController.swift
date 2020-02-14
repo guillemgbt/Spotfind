@@ -48,7 +48,15 @@ class LotDetailViewController: UIViewController {
         bindObservables()
         
         viewModel.fetchData()
+        viewModel.requestFlightStart()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        viewModel.requestFlightStop()
+    }
+    
     
     private func bindObservables() {
         bindName()

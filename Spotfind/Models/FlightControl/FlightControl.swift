@@ -18,37 +18,38 @@ enum FlightState: String {
     case initial = "INITIAL"
 }
 
-class FlightControl: UniqueObject {
+class FlightControl: GeneralObject {
     
     @objc dynamic var state: String = FlightState.initial.rawValue
-    @objc dynamic var area_id: Int = -1
+    @objc dynamic var lot_id: Int = -1
     
-    @discardableResult
-    func update(from json: JSON) -> Bool {
+    convenience init?(fromJSON json: JSON) {
         
-        guard let state = FlightState(rawValue: json["state"].stringValue), let area_id = json["area_id"].int else {
-            return false
+        guard let id = json["id"].int,
+                let state = FlightState(rawValue: json["state"].stringValue),
+                let lotID = json["lot_id"].int else {
+            return nil
         }
         
-        update(state: state.rawValue,
-               area_id: area_id,
-               created: json["created"].stringValue.toDate() ?? Date())
+        self.init(id: "\(id)",
+                  state: state.rawValue,
+                  lotID: lotID,
+                  created: json["created"].stringValue.toDate() ?? Date())
         
-        return true
     }
     
-    func update(state: String, area_id: Int, created: Date) {
-        self.created = created
+    convenience init(id: String, state: String, lotID: Int, created: Date) {
+        self.init(pk: id, created: created)
         self.state = state
-        self.area_id = area_id
+        self.lot_id = lotID
     }
     
     func getState() -> FlightState {
         return FlightState(rawValue: state) ?? FlightState.error
     }
     
-    func getAreaID() -> Int {
-        return area_id
+    func getLotID() -> Int {
+        return lot_id
     }
 
 }

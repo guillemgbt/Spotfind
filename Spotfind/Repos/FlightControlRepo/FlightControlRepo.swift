@@ -8,65 +8,64 @@
 
 import RealmSwift
 import RxSwift
+import RxCocoa
 
-class FlightControlRepo: UniqueObjectRepo<FlightControl> {
+class FlightControlRepo: GeneralObjectRepo<FlightControl> {
     
     static let shared: FlightControlRepo = FlightControlRepo()
     
-    func getFlightControl() -> FlightControl {
-        return FlightControl.getDefault()
-    }
     
-    func resetFlightControl() {
-        deleteStored()
-        _ = getFlightControl()
-    }
     
-    func fetch(networkState: Variable<NetworkRequestState>? = nil) {
+    func fetch(networkState: BehaviorRelay<NetworkRequestState>? = nil) {
         
-        networkState?.value = .loading
-        
+        networkState?.accept(.loading)
+
         api.get(requestPath: RequestPath(path: "flight/"), onSuccess: { (json) in
+                        
+            guard let control = FlightControl(fromJSON: json) else {
+                Utils.printDebug(sender: self, message: "Could not parse Lot from JSON")
+                networkState?.accept(.error)
+                return
+            }
             
-            print(json)
+            self.updateStored(object: control)
             
-            self.update(updateBlock: { (flightControl) in
-                flightControl.update(from: json)
-            })
-            
-            networkState?.value = .success
-            
+            networkState?.accept(.success)
+
             Utils.printDebug(sender: self, message: "Fetch success")
             
         }) { (description, dict) in
             
-            networkState?.value = .error
-            
+            networkState?.accept(.error)
+
             Utils.printError(sender: self, message: "Could not fetch: \(description)")
             
         }
         
     }
     
-    func requestStart(for areaID: String, networkState: Variable<NetworkRequestState>? = nil) {
+    func requestStart(for lotID: String, networkState: BehaviorRelay<NetworkRequestState>? = nil) {
         
-        networkState?.value = .loading
+        networkState?.accept(.loading)
         
-        api.get(requestPath: RequestPath(path: "area/\(areaID)/start/"), onSuccess: { (json) in
+        api.get(requestPath: RequestPath(path: "flight/lot/\(lotID)/start/"), onSuccess: { (json) in
             
-            print(json)
+            guard let control = FlightControl(fromJSON: json) else {
+                Utils.printDebug(sender: self, message: "Could not parse Lot from JSON")
+                networkState?.accept(.error)
+                return
+            }
             
-            self.update(updateBlock: { (flightControl) in
-                flightControl.update(from: json)
-            })
+            self.updateStored(object: control)
             
-            networkState?.value = .success
+            
+            networkState?.accept(.success)
             
             Utils.printDebug(sender: self, message: "Start success")
             
         }) { (description, dict) in
             
-            networkState?.value = .error
+            networkState?.accept(.error)
             
             Utils.printError(sender: self, message: "Start error: \(description)")
             
@@ -74,25 +73,26 @@ class FlightControlRepo: UniqueObjectRepo<FlightControl> {
         
     }
     
-    func requestStop(networkState: Variable<NetworkRequestState>? = nil) {
+    func requestStop(for lotID: String, networkState: BehaviorRelay<NetworkRequestState>? = nil) {
         
-        networkState?.value = .loading
+        networkState?.accept(.loading)
         
-        api.get(requestPath: RequestPath(path: "area/stop/"), onSuccess: { (json) in
+        api.get(requestPath: RequestPath(path: "flight/lot/\(lotID)/stop/"), onSuccess: { (json) in
             
-            print(json)
+            guard let control = FlightControl(fromJSON: json) else {
+                Utils.printDebug(sender: self, message: "Could not parse Lot from JSON")
+                networkState?.accept(.error)
+                return
+            }
             
-            self.update(updateBlock: { (flightControl) in
-                flightControl.update(from: json)
-            })
+            self.updateStored(object: control)
             
-            networkState?.value = .success
-            
+            networkState?.accept(.success)
             Utils.printDebug(sender: self, message: "Stop success")
             
         }) { (description, dict) in
             
-            networkState?.value = .error
+            networkState?.accept(.error)
             
             Utils.printError(sender: self, message: "Stop error: \(description)")
             
